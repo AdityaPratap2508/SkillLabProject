@@ -1,16 +1,99 @@
-# React + Vite
+# SmartCare Hospital Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern hospital management system built with Express.js, MySQL, and Bootstrap-based frontend. The application provides role-based dashboards for administrators, doctors, nurses, receptionists, pharmacists, laboratory technicians, and billing staff.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Secure login and JWT-based authentication
+- Role-based access control
+- Dashboard with live hospital stats and charts
+- Patient management and search
+- Doctor directory
+- Appointment booking and tracking
+- Bed and ward management
+- Admission and discharge workflow
+- EMR, prescriptions, lab orders, billing, and reports
+- Responsive UI
 
-## React Compiler
+## Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```text
+smartcare-hms/
+├── backend/
+│   ├── config/
+│   ├── middleware/
+│   ├── routes/
+│   └── server.js
+├── database/
+│   ├── schema.sql
+│   └── seed.sql
+├── frontend/
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
+├── .env.example
+├── package.json
+└── README.md
+```
 
-## Expanding the Oxlint configuration
+## Requirements
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- Node.js 18+
+- MySQL 8.0+
+- VS Code
+
+## Setup MySQL
+
+1. Create a MySQL database named `smartcare_hms`.
+2. Update `.env` with your database credentials.
+3. Import the schema file:
+
+```bash
+mysql -u root -p smartcare_hms < database/schema.sql
+mysql -u root -p smartcare_hms < database/seed.sql
+```
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+## Create Environment File
+
+```bash
+cp .env.example .env
+```
+
+Then update the values in `.env`.
+
+## Start the Application
+
+```bash
+npm start
+```
+
+Open: http://localhost:3000
+
+## Seed the Default Admin User
+
+```bash
+npm run seed
+```
+
+Default admin login:
+
+- Email: admin@smartcare.local
+- Password: Admin@123
+
+## Patient and Doctor Access
+
+- From the sign-in screen, choose **Create patient account** and enter your own details. Patient records are scoped to the signed-in account; optional health details are marked as patient-entered and are not clinician-verified.
+- Doctor demo login: `doctor@smartcare.local` / `Admin@123`. The doctor workspace shows the clinician role, professional profile, and assigned schedule.
+- With MySQL configured and the application tables available, patient accounts and profiles are saved in MySQL. If MySQL is unavailable, the app uses temporary in-memory demo storage; those accounts are lost when the server restarts.
+
+## Notes
+
+- This is a development-ready foundation using synthetic demo data.
+- Replace placeholder values and demo records before production deployment.
+- For production, enable HTTPS, stricter CORS rules, and secure secrets management.
